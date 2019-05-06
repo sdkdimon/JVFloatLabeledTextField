@@ -31,6 +31,12 @@
 static CGFloat const kFloatingLabelShowAnimationDuration = 0.3f;
 static CGFloat const kFloatingLabelHideAnimationDuration = 0.3f;
 
+@interface JVFloatLabeledTextField ()
+
+@property (strong, nonatomic, readonly) NSMutableDictionary <NSAttributedStringKey, id> *placeholderTextAttributes;
+
+@end
+
 @implementation JVFloatLabeledTextField
 {
     BOOL _isFloatingLabelFontDefault;
@@ -56,6 +62,7 @@ static CGFloat const kFloatingLabelHideAnimationDuration = 0.3f;
 
 - (void)commonInit
 {
+    _placeholderTextAttributes = [[NSMutableDictionary alloc] initWithCapacity:2];
     _floatingLabel = [UILabel new];
     _floatingLabel.alpha = 0.0f;
     [self addSubview:_floatingLabel];
@@ -233,13 +240,12 @@ static CGFloat const kFloatingLabelHideAnimationDuration = 0.3f;
 
 - (void)setCorrectPlaceholder:(NSString *)placeholder
 {
-    if (self.placeholderColor && placeholder) {
-        NSAttributedString *attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder
-                                                                                    attributes:@{NSForegroundColorAttributeName: self.placeholderColor}];
-        [super setAttributedPlaceholder:attributedPlaceholder];
-    } else {
-        [super setPlaceholder:placeholder];
+    NSAttributedString *attributedPlaceholder = nil;
+    if (placeholder) {
+        attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder
+                                                                attributes:self.placeholderTextAttributes];
     }
+    [super setAttributedPlaceholder:attributedPlaceholder];
 }
 
 - (void)setPlaceholder:(NSString *)placeholder
@@ -269,8 +275,24 @@ static CGFloat const kFloatingLabelHideAnimationDuration = 0.3f;
 
 - (void)setPlaceholderColor:(UIColor *)color
 {
-    _placeholderColor = color;
+    color != nil ? [self.placeholderTextAttributes setObject:color forKey:NSForegroundColorAttributeName] : [self.placeholderTextAttributes removeObjectForKey:NSForegroundColorAttributeName];
     [self setCorrectPlaceholder:self.placeholder];
+}
+
+- (UIColor *)placeholderColor
+{
+    return [self.placeholderTextAttributes objectForKey:NSForegroundColorAttributeName];
+}
+
+- (void)setPlaceholderFont:(UIFont *)placeholderFont
+{
+    placeholderFont != nil ? [self.placeholderTextAttributes setObject:placeholderFont forKey:NSFontAttributeName] : [self.placeholderTextAttributes removeObjectForKey:NSFontAttributeName];
+    [self setCorrectPlaceholder:self.placeholder];
+}
+
+- (UIFont *)placeholderFont
+{
+    return [self.placeholderTextAttributes objectForKey:NSFontAttributeName];
 }
 
 - (CGRect)textRectForBounds:(CGRect)bounds

@@ -134,6 +134,11 @@ IB_DESIGNABLE
 @property (nonatomic, strong) IBInspectable UIColor * placeholderColor;
 
 /**
+ * Font of the placeholder
+ */
+@property (nonatomic, strong) IBInspectable UIFont * placeholderFont;
+
+/**
  *  Sets the placeholder and the floating title
  *
  *  @param placeholder The string that to be shown in the text field when no other text is present.
