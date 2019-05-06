@@ -209,6 +209,11 @@ static CGFloat const kFloatingLabelHideAnimationDuration = 0.3f;
     [self setNeedsLayout];
 }
 
+- (NSString *)floatingLabelText
+{
+    return _floatingLabel.text;
+}
+
 #pragma mark - UITextField
 
 - (void)setFont:(UIFont *)font

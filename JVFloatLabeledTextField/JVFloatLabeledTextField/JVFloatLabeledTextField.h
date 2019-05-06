@@ -87,6 +87,11 @@ IB_DESIGNABLE
 @property (nonatomic, strong) IBInspectable UIColor * floatingLabelTextColor;
 
 /**
+ * Floating label text.
+ */
+@property (nonatomic, strong) NSString * floatingLabelText;
+
+/**
  * Text color to be applied to the floating label while the field is a first responder.
  * Tint color is used by default if an `floatingLabelActiveTextColor` is not provided.
  */
@@ -136,7 +141,7 @@ IB_DESIGNABLE
 /**
  * Font of the placeholder
  */
-@property (nonatomic, strong) IBInspectable UIFont * placeholderFont;
+@property (nonatomic, strong) UIFont * placeholderFont;
 
 /**
  *  Sets the placeholder and the floating title
