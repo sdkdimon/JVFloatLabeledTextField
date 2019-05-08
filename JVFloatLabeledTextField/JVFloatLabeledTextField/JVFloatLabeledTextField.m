@@ -386,11 +386,13 @@ static CGFloat const kFloatingLabelHideAnimationDuration = 0.3f;
     
     [self setLabelOriginForTextAlignment];
     
-    CGSize floatingLabelSize = [_floatingLabel sizeThatFits:_floatingLabel.superview.bounds.size];
+    CGSize floatingLabelSize = [_floatingLabel sizeThatFits:self.bounds.size];
+    CGFloat width = floatingLabelSize.width > self.bounds.size.width ? self.bounds.size.width : floatingLabelSize.width;
+
     
     _floatingLabel.frame = CGRectMake(_floatingLabel.frame.origin.x,
                                       _floatingLabel.frame.origin.y,
-                                      floatingLabelSize.width,
+                                      width,
                                       floatingLabelSize.height);
     
     BOOL firstResponder = self.isFirstResponder;
