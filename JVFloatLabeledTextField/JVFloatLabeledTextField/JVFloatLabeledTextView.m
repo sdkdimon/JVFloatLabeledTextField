@@ -144,7 +144,7 @@ static CGFloat const kFloatingLabelHideAnimationDuration = 0.3f;
         textViewFont = self.placeholderLabel.font;
     }
     
-    return [UIFont fontWithName:textViewFont.fontName size:roundf(textViewFont.pointSize * 0.7f)];
+    return [textViewFont fontWithSize:roundf(textViewFont.pointSize * 0.7f)];
 }
 
 - (void)setPlaceholder:(NSString *)placeholder
@@ -340,7 +340,7 @@ static CGFloat const kFloatingLabelHideAnimationDuration = 0.3f;
         rect.origin.y += self.textContainerInset.top;
     }
     
-    return CGRectIntegral(rect);
+    return rect;
 }
 
 - (void)setFloatingLabelFont:(UIFont *)floatingLabelFont
